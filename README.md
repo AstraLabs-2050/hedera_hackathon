@@ -1,4 +1,4 @@
-# Astra — Discover African Fashion in VR Before It Exists IRL  
+## Astra — Discover African Fashion in VR Before It Exists IRL  
 🌍 Hedera Africa Hackathon 2025 Submission
 
 ## 🧠 Summary
@@ -12,7 +12,7 @@ Using **Hedera Smart Contracts** and **Hedera Token Service**, Astra enables mil
 
 This model reimagines retail: one where discovery happens virtually, production happens only when needed, and every designer can reach the world.
 
----
+
 
 ## 🧩 Key Features
 
@@ -23,7 +23,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 - 🌍 **Creator-to-Maker Matching:** Connects designers, verified makers, and global shoppers seamlessly  
 - ♻️ **Sustainable by Design:** No item is produced until ordered, reducing overproduction waste  
 
----
+
 
 ## 💡 What We Built
 
@@ -35,7 +35,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 | `Frontend Portal` | A chat-enabled interface for collaboration, order tracking, and escrow release |
 | `Planned: Guardian Sustainability Framework` | A future carbon accounting methodology for digital fashion creators |
 
----
+
 
 ## 🔗 How We Used Hedera
 
@@ -48,7 +48,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 3. **Planned: Guardian Sustainability Layer:**  
    - We’re developing a methodology for verifying sustainable creation and carbon savings through digital-first fashion — creating a measurable impact registry for fashion brands.
 
----
+
 
 ## 🔍 Use Case
 
@@ -70,7 +70,7 @@ After removing the headset, they receive a purchase link where they:
 The verified maker produces the outfit, and it’s shipped directly to their doorstep.  
 This model bridges immersive exploration with physical delivery — reducing overproduction while empowering designers and verified makers.
 
----
+
 
 ## 🎯 Why It Matters
 
@@ -80,7 +80,7 @@ Consumers have no sustainable way to preview how something will look or fit.
 
 Astra fixes this by merging digital fashion, on-demand manufacturing, and blockchain verification into one ecosystem that can start small — with African fashion creators — and scale globally to transform how clothes are designed, sold, and made.
 
----
+
 
 ## 🌐 Live Links
 
@@ -88,7 +88,7 @@ Astra fixes this by merging digital fashion, on-demand manufacturing, and blockc
 - 🧠 [DoraHacks Submission](https://dorahacks.io/buidl/26613)  
 - 📱 [Instagram](https://instagram.com/astralabs2050)
 
----
+
 
 ## 🚀 Team
 
@@ -109,7 +109,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 - **Emmanuel Ekpeyong – Blockchain Developer**  
   Handles smart contract infrastructure, NFT minting, and USDC escrow logic.  
 
----
+
 
 ## 🛣️ What’s Next
 
@@ -119,7 +119,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 - Partner with major brands for digital try-on experiences  
 - Onboard 1,000+ African designers and tailors into Astra’s ecosystem  
 
----
+
 
 ## 💬 Pitch
 
@@ -128,7 +128,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 Please see our pitch deck here and join our mission to reinvent fashion discovery and retail:
 https://docsend.com/view/3hjxc5cv3jvdrdki
 
----
+
 
 ## 🏆 Why We Should Win
 
