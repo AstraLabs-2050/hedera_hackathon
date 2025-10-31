@@ -1,4 +1,4 @@
-# Astra — Discover Fashion in VR Before It Exists IRL  
+# Astra — Discover African Fashion in VR Before It Exists IRL  
 🌍 Hedera Africa Hackathon 2025 Submission
 
 ## 🧠 Summary
@@ -6,7 +6,7 @@
 Astra is building the bridge between immersive virtual fashion and real-world manufacturing.  
 We let designers publish digital fashion in virtual storefronts where shoppers can explore, try on, and order custom pieces — all before anything is produced.  
 
-Our mission begins in Africa, connecting local creators and verified tailors to global buyers through a transparent, on-chain system. But the impact extends far beyond — the same model can help the entire fashion industry reduce waste, verify creators, and make production on-demand.  
+Our mission begins in Africa, connecting fashion designers to global buyers through a transparent, on-chain system. But the impact extends far beyond — the same model can help the entire fashion industry reduce waste, verify creators, and make production on-demand.  
 
 Using **Hedera Smart Contracts** and **Hedera Token Service**, Astra enables milestone-based **USDC escrow payments**, NFT-based design ownership, and (in the future) **Guardian-verified sustainability credentials** for creators.
 
@@ -104,7 +104,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
   Builds the user-facing components that connect NFTs and smart contracts.  
 
 - **Abayomi Dannon – Web3 Frontend Developer**  
-  Develops the decentralized frontend stack, integrating payments and maker workflows.  
+  Develops the decentralised frontend stack, integrating payments and maker workflows.  
 
 - **Emmanuel Ekpeyong – Blockchain Developer**  
   Handles smart contract infrastructure, NFT minting, and USDC escrow logic.  
@@ -114,8 +114,8 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 ## 🛣️ What’s Next
 
 - Launch Guardian-based sustainability credentials for fashion makers  
-- Expand pop-up VR fashion stores across Nigeria, Ghana, and Kenya  
-- Integrate fiat and crypto payment rails for global buyers  
+- Expand pop-up VR fashion stores across London, Paris and Dubai 
+- Integrate fiat on/off-ramp payment rails for global buyers  
 - Partner with major brands for digital try-on experiences  
 - Onboard 1,000+ African designers and tailors into Astra’s ecosystem  
 
@@ -123,10 +123,11 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 
 ## 💬 Pitch
 
-> _“Astra is reimagining how fashion is discovered, made, and delivered — starting in Africa, scaling to the world.”
+“Astra is reimagining how fashion is discovered, made, and delivered gobally— starting in Africa, scaling to the world.”
 
-Please see our pitch deck here:
+Please see our pitch deck here and join our mission to reinvent fashion discovery and retail:
 https://docsend.com/view/3hjxc5cv3jvdrdki
+
 ---
 
 ## 🏆 Why We Should Win
@@ -138,8 +139,7 @@ https://docsend.com/view/3hjxc5cv3jvdrdki
 - 💡 Tested and showcased in the real world with amazing reviews 
 
 You can see our real-world showcase at Forum Creation Africa here: 
-https://www.instagram.com/reel/DQTuhlPjDNq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==
----
+https://www.instagram.com/reel/DQTuhlPjDNq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==---
 
 ## 📜 License
 
