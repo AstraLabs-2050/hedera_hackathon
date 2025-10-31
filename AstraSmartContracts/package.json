@@ -1,0 +1,36 @@
+{
+  "name": "astra-hedera-contracts",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
+    "clean": "npx hardhat clean",
+    "deploy:escrow": "npx hardhat run scripts/deploy-escrow.ts --network hederaTestnet",
+    "run:post-deploy": "npx hardhat run scripts/post-deploy.ts --network hederaTestnet",
+    "run:escrow": "npx hardhat run scripts/run-escrow.ts --network hederaTestnet",
+    "run:nft-collectible": "npx hardhat run scripts/run-nft-collectible.ts --network hederaTestnet",
+    "deploy:nft-collectible": "npx hardhat run scripts/deploy-nft-collectible.ts --network hederaTestnet",
+    "test:listing": "npx hardhat run scripts/test-listing.ts --network hederaTestnet",
+    "test:batch-listing": "npx hardhat run scripts/test-batch-listing.ts --network hederaTestnet",
+    "test:integration": "npx hardhat run scripts/integration-test.ts --network hederaTestnet"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Astra Escrow & NFT contracts on Hedera blockchain.",
+  "dependencies": {
+    "hardhat": "^2.26.3"
+  },
+  "devDependencies": {
+    "@hashgraph/sdk": "^2.75.0",
+    "@hashgraph/smart-contracts": "github:hashgraph/hedera-smart-contracts",
+    "@nomicfoundation/hardhat-toolbox": "^6.1.0",
+    "@openzeppelin/contracts": "^4.9.6",
+    "@openzeppelin/contracts-upgradeable": "^4.9.6",
+    "@openzeppelin/hardhat-upgrades": "^3.9.1",
+    "@typechain/ethers-v6": "^0.5.1",
+    "@typechain/hardhat": "^9.1.0",
+    "dotenv": "^17.2.3",
+    "typechain": "^8.3.2"
+  }
+}
