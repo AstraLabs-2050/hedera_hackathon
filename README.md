@@ -116,7 +116,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 - **Abayomi Dannon – Web3 Frontend Developer**  
   Develops the decentralised frontend stack, integrating payments and maker workflows.  
 
-- **Emmanuel Ekpeyong – Blockchain Developer**  
+- **Emmanuel Ekpenyong – Blockchain Developer**  
   Handles smart contract infrastructure, NFT minting, and USDC escrow logic.  
 
 
