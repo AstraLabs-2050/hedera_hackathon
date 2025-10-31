@@ -1,8 +1,10 @@
-# Astra — Discover African Fashion in VR Before It Exists IRL  
+# Astra Virtual Retail
+# Discover African Fashion in VR Before It Exists IRL  
+
 🌍 Hedera Africa Hackathon 2025 Submission
 
 
-# 🧠 Summary
+# Summary
 
 Astra is building the bridge between immersive virtual fashion and real-world manufacturing.  
 We let designers publish digital fashion in virtual storefronts where shoppers can explore, try on, and order custom pieces — all before anything is produced.  
@@ -16,7 +18,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 
 
 
-# 🧩 Key Features
+#  Key Features
 
 - 🛍️ **Virtual Try-On Storefronts:** Immersive 3D stores where shoppers try digital outfits on avatars  
 - ✍🏾 **Tokenized Fashion IP:** Every design is an NFT with proof of originality and timestamp  
@@ -28,7 +30,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 
 
 
-# 💡 What We Built
+# What We Built
 
 | Module | Description |
 |--------|-------------|
@@ -41,7 +43,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 
 
 
-# 🔗 How We Used Hedera
+# How We Used Hedera
 
 1. **Hedera Smart Contracts 2.0 (USDC Escrow):**  
    - Escrow holds buyer funds in USDC and releases them to makers in three stages: order start, work proof, and final delivery.
@@ -55,7 +57,7 @@ This model reimagines retail: one where discovery happens virtually, production 
 
 
 
-# 🔍 Use Case
+# Use Case
 
 Fashion brands can mint digital designs using **Hedera Token Service (NFTs)** on Astra.
 
@@ -78,7 +80,7 @@ This model bridges immersive exploration with physical delivery — reducing ove
 
 
 
-# 🎯 Why It Matters
+# Why It Matters
 
 Fashion today is broken — over $500B of unsold stock goes to waste each year.  
 Designers are forced to mass-produce before knowing demand.  
@@ -89,7 +91,7 @@ Astra fixes this by merging digital fashion, on-demand manufacturing, and blockc
 
 
 
-# 🌐 Live Links
+# Live Links
 
 - 🌍 [Website](https://astra.fashion)  
 - 🧠 [DoraHacks Submission](https://dorahacks.io/buidl/26613)  
@@ -98,7 +100,7 @@ Astra fixes this by merging digital fashion, on-demand manufacturing, and blockc
 
 
 
-# 🚀 Team
+#  Team
 
 Astra is led by a multidisciplinary team building the future of decentralized fashion commerce from Africa to the world.  
 
@@ -120,7 +122,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 
 
 
-# 🛣️ What’s Next
+# What’s Next
 
 - Launch Guardian-based sustainability credentials for fashion makers  
 - Expand pop-up VR fashion stores across London, Paris and Dubai 
@@ -131,7 +133,7 @@ Astra is led by a multidisciplinary team building the future of decentralized fa
 
 
 
-# 💬 Pitch
+# Pitch
 
 “Astra is reimagining how fashion is discovered, made, and delivered gobally— starting in Africa, scaling to the world.”
 
@@ -141,7 +143,7 @@ https://docsend.com/view/3hjxc5cv3jvdrdki
 
 
 
-# 🏆 Why We Should Win
+# Why We Should Win
 
 - 🎯 Practical and clear use of Hedera Smart Contracts + HTS  
 - 🌍 Scalable model solving real fashion industry inefficiencies  
@@ -153,6 +155,6 @@ You can see our real-world showcase at Forum Creation Africa here:
 https://www.instagram.com/reel/DQTuhlPjDNq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==---
 
 
-# 📜 License
+# License
 
 MIT
