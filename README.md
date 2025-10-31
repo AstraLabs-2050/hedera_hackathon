@@ -36,8 +36,8 @@ This model reimagines retail: one where discovery happens virtually, production 
 |--------|-------------|
 | `Virtual Storefront MVP` | Immersive VR store for browsing and trying on digital designs |
 | `Smart Escrow System` | Hedera Smart Contracts that manage milestone-based USDC payouts |
-| `NFT Minting` | Uses Hedera Token Service (HTS) to tokenize creator designs with proof of ownership |
-| `Frontend Portal` | A chat-enabled interface for collaboration, order tracking, and escrow release |
+| `NFT Marketplace` | Uses Hedera Token Service (HTS) to tokenize creator designs with proof of ownership |
+| `Chat Pay` | A chat-enabled interface for collaboration, order tracking, and escrow release |
 | `Planned: Guardian Sustainability Framework` | A future carbon accounting methodology for digital fashion creators |
 
 
