@@ -3,6 +3,8 @@
 
 🌍 Hedera Africa Hackathon 2025 Submission
 
+![Methodology (4)](https://github.com/user-attachments/assets/1bc9dce0-e056-468e-91a4-afc938fec530)
+
 
 # Summary
 
