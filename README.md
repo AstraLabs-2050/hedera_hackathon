@@ -2,7 +2,6 @@
 
 🌍 Hedera Africa Hackathon 2025 Submission
 
-
 # 🧠 Summary
 
 Astra is building the bridge between immersive virtual fashion and real-world manufacturing.  
