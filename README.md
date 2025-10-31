@@ -3,8 +3,6 @@
 
 🌍 Hedera Africa Hackathon 2025 Submission
 
-![Methodology (4)](https://github.com/user-attachments/assets/1bc9dce0-e056-468e-91a4-afc938fec530)
-
 
 # Summary
 
@@ -21,6 +19,9 @@ This model reimagines retail: one where discovery happens virtually, production 
 
 
 #  Key Features
+
+![Methodology (5)](https://github.com/user-attachments/assets/feb3bea5-f16c-419a-91f0-3f89fcb61529)
+
 
 - 🛍️ **Virtual Try-On Storefronts:** Immersive 3D stores where shoppers try digital outfits on avatars  
 - ✍🏾 **Tokenized Fashion IP:** Every design is an NFT with proof of originality and timestamp  
