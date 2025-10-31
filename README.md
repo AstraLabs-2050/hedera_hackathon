@@ -1,4 +1,5 @@
-## Astra — Discover African Fashion in VR Before It Exists IRL  
+## Astra — Discover African Fashion in VR Before It Exists IRL
+
 🌍 Hedera Africa Hackathon 2025 Submission
 
 
