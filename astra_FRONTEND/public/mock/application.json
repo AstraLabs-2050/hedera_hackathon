@@ -1,0 +1,44 @@
+[
+    {
+        "jobId": "43a5752c-00e7-46c9-a266-1d62d15ab678",
+        "title": "Custom Ankara Dress Design for Owambé Party",
+        "applicationsCount": 2,
+        "image": "/women-ankara.jpg",
+        "price": 400,
+        "applicants": [
+            {
+                "makerId": "89c284d4-b06e-42dc-89f0-e3e1a6a8ef3c",
+                "name": "John Creator",
+                "email": "john.doe@example.com",
+                "profileImage": "/profilePicture1.png",
+                "yearsOfExperience": 5,
+                "skills": [
+                    "Dressmaking",
+                    "Pattern Cutting",
+                    "Fashion Illustration"
+                ],
+                "proposedAmount": 450,
+                "minimumNegotiableAmount": 400,
+                "timeline": "2",
+                "portfolioLinks": [
+                    "https://portfolio.example.com/project1",
+                    "https://behance.net/mywork"
+                ],
+                "selectedProjects": [
+                    {
+                        "id": "project-id-1",
+                        "title": "Luxury Aso-Oke Bridal Wear",
+                        "thumbnail": "/women-ankara3.jpg",
+                        "link": "https://portfolio.example.com/bag-branding"
+                    },
+                    {
+                        "id": "project-id-2",
+                        "title": "Modern Kente-Ankara Gown",
+                        "thumbnail": "/women-ankara2.jpg",
+                        "link": "https://behance.net/fashion-logo"
+                    }
+                ]
+            }
+        ]
+    }
+]

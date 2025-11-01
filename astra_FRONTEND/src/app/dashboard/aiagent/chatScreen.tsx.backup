@@ -1,0 +1,540 @@
+"use client"
+// Updated ChatScreen.tsx with agent image support
+import React, { useEffect, useState, useRef, useLayoutEffect } from "react"
+import Image from "next/image"
+import DeliveryMeasurementsMessage from "./deliveryMeasurementsMessage"
+  id: string
+  sender: "user" | "agent"
+  content: string | React.ReactNode
+  images?: string[]
+  timestamp: string
+  options?: string[]
+  messageType?: string
+  deliveryData?: any
+}
+
+// Define possible input types
+type InputType = "input_text" | "input_image"
+
+// Define agent message payload
+interface AgentMessagePayload {
+  senderId: string
+  image: any[]
+  type: InputType
+  message: string
+  previousId?: string
+  collectionId?: string
+}
+
+// Define agent response structure - Updated to include generatedImageBase64
+interface AgentResponse {
+  data: {
+    message: {
+      message: string
+      options?: string[]
+      userDetails?: {
+        submitted?: boolean
+        [key: string]: any
+      }
+      [key: string]: any
+    }
+    id?: string
+    response?: any
+    collectionId?: string | null
+    generatedImageBase64?: ArrayBuffer | string
+  }
+}
+
+// Loading states enum
+enum LoadingState {
+  IDLE = "idle",
+  INITIALIZING = "initializing",
+  SENDING_MESSAGE = "sending_message",
+  WAITING_RESPONSE = "waiting_response",
+  COMPLETE = "complete",
+}
+
+// Function to convert ArrayBuffer to base64
+function arrayBufferToBase64(buffer: ArrayBuffer): string {
+  let binary = ""
+  const bytes = new Uint8Array(buffer)
+  const len = bytes.byteLength
+  for (let i = 0; i < len; i++) {
+    binary += String.fromCharCode(bytes[i])
+  }
+  return btoa(binary)
+}
+
+const ChatScreen: React.FC = () => {
+  const [userInformation, setUserInformation] = useState<any>(null)
+  const [messages, setMessages] = useState<Message[]>([])
+  const [previousId, setPreviousId] = useState<string | null>(null)
+  const [collectionId, setCollectionId] = useState<string | null>(null)
+  const [loadingState, setLoadingState] = useState<LoadingState>(LoadingState.INITIALIZING)
+  const [error, setError] = useState<string | null>(null)
+  const [connectionError, setConnectionError] = useState<boolean>(false)
+  const [isProcessingOption, setIsProcessingOption] = useState<boolean>(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+  const chatContainerRef = useRef<HTMLDivElement>(null)
+
+  // Scroll to bottom function with smooth behavior
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })
+  }
+
+  // Alternative scroll function that uses the container directly
+  const scrollContainerToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight
+    }
+  }
+
+  // Use useLayoutEffect to ensure DOM is updated before scrolling
+  useLayoutEffect(() => {
+    // Use setTimeout to ensure React has finished rendering
+    const timeoutId = setTimeout(() => {
+      scrollToBottom()
+    }, 100)
+
+    return () => clearTimeout(timeoutId)
+  }, [messages])
+
+  // Additional scroll on messages length change
+  useEffect(() => {
+    // Also scroll when new messages are added
+    if (messages.length > 0) {
+      scrollContainerToBottom()
+    }
+  }, [messages.length])
+
+  // Load stored conversation data from localStorage
+  useEffect(() => {
+    try {
+      // Check if initial message has been sent in this session
+      const initialMsgSent = localStorage.getItem("initialMessageSent") === "true"
+      setInitialMessageSent(initialMsgSent)
+
+      const storedPreviousId = localStorage.getItem("previousId")
+      const storedCollectionId = localStorage.getItem("collectionId")
+
+      if (storedPreviousId) {
+        setPreviousId(storedPreviousId)
+      }
+
+      if (storedCollectionId) {
+        setCollectionId(storedCollectionId)
+      }
+    } catch (error) {
+      console.error("Error loading conversation data from localStorage:", error)
+      setError("Failed to load conversation history")
+    }
+  }, [])
+
+  // Load user information from localStorage
+  useEffect(() => {
+    setLoadingState(LoadingState.INITIALIZING)
+    const userInfo: string | null = localStorage.getItem("user_data")
+    if (userInfo) {
+      try {
+        const parsedUserInfo = JSON.parse(userInfo)
+        setUserInformation(parsedUserInfo)
+        setLoadingState(LoadingState.IDLE)
+      } catch (error) {
+        console.error("Error parsing user information:", error)
+        setError("Failed to load user information")
+        setLoadingState(LoadingState.IDLE)
+      }
+    } else {
+      setError("No user information found. Please log in.")
+      setLoadingState(LoadingState.IDLE)
+    }
+  }, [])
+
+  // Set up socket listener for agent responses
+  useEffect(() => {
+    // Socket connection error handling
+    const handleConnectionError = () => {
+      setConnectionError(true)
+      setError("Connection error. Please check your internet connection.")
+    }
+
+    const handleConnect = () => {
+      setConnectionError(false)
+      if (error === "Connection error. Please check your internet connection.") {
+        setError(null)
+      }
+    }
+
+    const handleAgentMessage = (data: AgentResponse) => {
+      
+      
+      try {
+        const agentResponse = data?.data?.message
+        const options = agentResponse?.options || []
+        const responseId = data?.data?.id
+        const responseCollectionId = data?.data?.collectionId
+        const generatedImageBase64 = data?.data?.generatedImageBase64
+        const isSubmitted = agentResponse?.userDetails?.submitted === true
+
+        // Update IDs and store them
+        if (responseId) {
+          setPreviousId(responseId)
+          localStorage.setItem("previousId", responseId)
+        }
+
+        if (responseCollectionId) {
+          setCollectionId(responseCollectionId)
+          localStorage.setItem("collectionId", responseCollectionId)
+        }
+
+        // If submitted is true, clear the stored values
+        if (isSubmitted) {
+          setPreviousId(null)
+          setCollectionId(null)
+          localStorage.removeItem("previousId")
+          localStorage.removeItem("collectionId")
+          localStorage.removeItem("initialMessageSent")
+        }
+
+        // Convert ArrayBuffer to base64 if needed
+        let imageBase64 = null
+        if (generatedImageBase64) {
+          if (generatedImageBase64 instanceof ArrayBuffer) {
+            imageBase64 = `data:image/jpeg;base64,${arrayBufferToBase64(generatedImageBase64)}`
+          } else if (typeof generatedImageBase64 === "string") {
+            // If it's already a string, check if it has data:image prefix
+            imageBase64 = generatedImageBase64.startsWith("data:image/")
+              ? generatedImageBase64
+              : `data:image/jpeg;base64,${generatedImageBase64}`
+          }
+        }
+
+        // Prepare images array if agent sent an image
+        const agentImages = imageBase64 ? [imageBase64] : undefined
+
+        const newMessage: Message = {
+          id: `agent-${Date.now()}`,
+          sender: "agent",
+          content: (
+            <AgentReply
+              preHeading={agentResponse?.response|| agentResponse?.message}
+              showBodyList={options.length > 0}
+              cardItems={options.map((option: string) => ({ title: option }))}
+              images={agentImages}
+            />
+          ),
+          options: options,
+          images: agentImages,
+          timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+        }
+
+        setMessages(prevMessages => [...prevMessages, newMessage])
+        setLoadingState(LoadingState.IDLE)
+        setIsProcessingOption(false)
+      } catch (error) {
+        console.error("Error processing agent message:", error)
+        setError("Failed to process agent response")
+        setLoadingState(LoadingState.IDLE)
+        setIsProcessingOption(false)
+      }
+    }
+
+    Socket.on("agent_message", handleAgentMessage)
+    Socket.on("connect_error", handleConnectionError)
+    Socket.on("connect", handleConnect)
+
+    // Cleanup listeners on unmount
+    return () => {
+      Socket.off("agent_message", handleAgentMessage)
+      Socket.off("connect_error", handleConnectionError)
+      Socket.off("connect", handleConnect)
+    }
+  }, [error])
+
+  // Track whether initial message has been sent
+  const [initialMessageSent, setInitialMessageSent] = useState<boolean>(false)
+
+  // Send initial greeting only once when user information is available
+  useEffect(() => {
+    // Skip if already sent or if user info is not available
+    if (initialMessageSent || !userInformation?.brand?.userId || !userInformation?.brand?.name) {
+      return
+    }
+
+
+    // Prepare payload with optional stored values
+    const payload: AgentMessagePayload = {
+      senderId: userInformation.brand.userId,
+      image: [],
+      type: "input_text",
+      message: `hello my brand name is ${userInformation.brand.name}`,
+    }
+
+    // Add collectionId if available
+    if (collectionId) {
+      payload.collectionId = collectionId
+    }
+
+    // Add previousId if available
+    if (previousId) {
+      payload.previousId = previousId
+    }
+
+    // Send initial greeting to agent
+    Socket.emit("agentMessage", payload)
+    setLoadingState(LoadingState.WAITING_RESPONSE)
+
+    // Mark as sent to prevent duplicate messages
+    setInitialMessageSent(true)
+    localStorage.setItem("initialMessageSent", "true")
+  }, [
+    userInformation?.brand?.userId,
+    userInformation?.id,
+    userInformation?.brand?.name,
+    collectionId,
+    previousId,
+    initialMessageSent,
+  ])
+
+  // Handle sending a new message - FIXED VERSION
+  const handleSendMessage = (text: string, files: File[]) => {
+    if (!userInformation?.brand?.userId || !userInformation?.id) {
+      console.error("Cannot send message: User information not available")
+      setError("Cannot send message: User information not available")
+      return
+    }
+
+    // Validate that we have either text or files
+    if (!text && files.length === 0) {
+      console.error("Cannot send empty message")
+      return
+    }
+
+    // Clear any previous errors
+    setError(null)
+
+    // Create user message - content can be empty string if only files are sent
+    const newUserMessage: Message = {
+      id: `user-${Date.now()}`,
+      sender: "user",
+      content: text || "", // Allow empty string for file-only messages
+      images: files.length > 0 ? files.map((fileData: any) => fileData.base64) : undefined,
+      timestamp: new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
+    }
+
+    // Add user message to chat
+    setMessages(prevMessages => [...prevMessages, newUserMessage])
+    setLoadingState(LoadingState.SENDING_MESSAGE)
+
+    try {
+      // Prepare base payload
+      const payload: AgentMessagePayload = {
+        senderId: userInformation?.brand?.userId || userInformation?.id,
+        image: files.length > 0 ? files.map((fileData: any) => fileData.base64) : [],
+        type: files.length > 0 ? "input_image" : "input_text", // Properly set type based on files
+        message: text || "", // Allow empty string for file-only messages
+      }
+      // Add previousId if available
+      if (previousId) {
+        payload.previousId = previousId
+      }
+
+      // Add collectionId if available
+      if (collectionId) {
+        payload.collectionId = collectionId
+      }
+
+      // Send message to agent through socket
+      Socket.emit("agentMessage", payload)
+      setLoadingState(LoadingState.WAITING_RESPONSE)
+    } catch (error) {
+      console.error("Error sending message:", error)
+      setError("Failed to send message. Please try again.")
+      setLoadingState(LoadingState.IDLE)
+    }
+  }
+
+  // Handle option selection
+  const handleOptionSelect = (option: string) => {
+    setIsProcessingOption(true)
+    // Send the selected option as a user message
+    handleSendMessage(option, [])
+  }
+
+  // Retry function for errors
+  const handleRetry = () => {
+    setError(null)
+    setLoadingState(LoadingState.INITIALIZING)
+    window.location.reload()
+  }
+
+  return (
+    <div className="w-[880px] bg-[#FAFAFA] py-[40px] px-[24px] h-[90vh] flex flex-col">
+      {/* Header Section */}
+      <div className="flex flex-col items-center justify-center gap-[24px] h-[20vh]">
+        <Image src="/logo.svg" width={179} height={42.69} alt="logo" priority />
+        <p className="text-[30px] leading-[100%]">Welcome to your Creative Space</p>
+        <div className="flex items-center gap-1">
+          <Image src="/download.svg" width={20} height={20} alt="download" priority />
+          <p className="text-[15px] leading-[100%]">
+            Create your collection using AI and bring your ideas to life
+          </p>
+        </div>
+        <div className="bg-[#E0E0E0] w-[800px]"></div>
+      </div>
+
+      {/* Error Banner */}
+      {error && (
+        <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 flex justify-between items-center">
+          <span>{error}</span>
+          <button onClick={handleRetry} className="text-red-700 hover:text-red-900 font-semibold">
+            Retry
+          </button>
+        </div>
+      )}
+
+      {/* Connection Status */}
+      {connectionError && (
+        <div className="bg-yellow-100 text-yellow-700 px-4 py-3 rounded mb-4 flex items-center gap-2">
+          <div className="animate-pulse w-2 h-2 bg-yellow-500 rounded-full"></div>
+          <span>Reconnecting...</span>
+        </div>
+      )}
+
+      {/* Chat Content Section */}
+      <div
+        ref={chatContainerRef}
+        className="flex flex-col h-[50vh] overflow-y-auto p-[16px] gap-[24px]"
+      >
+        {/* Loading states */}
+        {loadingState === LoadingState.INITIALIZING && (
+          <div className="flex flex-col justify-center items-center h-full">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500 mb-4"></div>
+            <p className="text-gray-600">Initializing chat...</p>
+          </div>
+        )}
+
+        {/* Empty state (only shown when initialized and no messages) */}
+        {loadingState !== LoadingState.INITIALIZING && messages.length === 0 && (
+          <div className="flex justify-center items-center h-full">
+            <p className="text-gray-400">Starting conversation...</p>
+          </div>
+        )}
+
+        {/* Display all messages */}
+        {messages.map(message => (
+          <div key={message.id}>
+            {message.sender === "agent" ? (
+              <div className="flex gap-3 items-start">
+                {/* Agent avatar placeholder - will be updated with actual avatar */}
+                <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center flex-shrink-0">
+                  <Image src="/logo.svg" width={24} height={24} alt="AI Assistant" />
+                </div>
+                <div className="flex-1 max-w-2xl">
+                  {message.content}
+                </div>
+              </div>
+            ) : message.messageType === "delivery_and_measurements" ? (
+              <div className="flex gap-3 items-start justify-end">
+                {/* User avatar placeholder - will be updated with actual avatar */}
+                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                  <span className="text-sm font-semibold text-white">U</span>
+                </div>
+                <div className="max-w-md">
+                  <DeliveryMeasurementsMessage
+                    chatId={collectionId || ""}
+                    content={typeof message.content === 'string' ? message.content : "Delivery and measurements"}
+                    timestamp={message.timestamp}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="flex gap-3 items-start justify-end">
+                {/* User avatar placeholder - will be updated with actual avatar */}
+                <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+                  <span className="text-sm font-semibold text-white">U</span>
+                </div>
+                <div className="max-w-md">
+                  <UserReply
+                    content={message.content}
+                    images={message.images}
+                    timestamp={message.timestamp}
+                    avatar={userInformation?.brand?.logo || userInformation?.profilePicture}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+
+        {/* Loading indicator for waiting response */}
+        {(loadingState === LoadingState.WAITING_RESPONSE ||
+          loadingState === LoadingState.SENDING_MESSAGE) && (
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1">
+              <div
+                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                style={{ animationDelay: "0ms" }}
+              ></div>
+              <div
+                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                style={{ animationDelay: "150ms" }}
+              ></div>
+              <div
+                className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"
+                style={{ animationDelay: "300ms" }}
+              ></div>
+            </div>
+            <span className="text-sm text-gray-500">
+              {loadingState === LoadingState.SENDING_MESSAGE ? "Sending..." : "Agent is typing..."}
+            </span>
+          </div>
+        )}
+
+        {/* Display options if the last message has options */}
+        {messages.length > 0 &&
+          messages[messages.length - 1].options?.length &&
+          !isProcessingOption && (
+            <div className="grid grid-cols-1 gap-2 mb-4">
+              {messages[messages.length - 1].options?.map((option, index) => (
+                <div
+                  key={index}
+                  className="bg-white p-3 rounded border border-gray-200 cursor-pointer hover:border-blue-300 transition-colors"
+                  onClick={() => handleOptionSelect(option)}
+                >
+                  <p className="font-medium">{option}</p>
+                </div>
+              ))}
+            </div>
+          )}
+
+        {/* Processing indicator for selected option */}
+        {isProcessingOption && (
+          <div className="flex items-center gap-2 text-sm text-gray-500">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-gray-500"></div>
+            <span>Processing your selection...</span>
+          </div>
+        )}
+
+        {/* Empty div for scrolling to bottom - IMPORTANT: Add the ref here! */}
+        <div ref={messagesEndRef} />
+      </div>
+
+      <div className="">
+        <MessageInput
+          onSend={handleSendMessage}
+          placeholder="Type your response..."
+          disabled={
+            !userInformation?.brand?.userId ||
+            !userInformation?.id ||
+            loadingState === LoadingState.SENDING_MESSAGE ||
+            loadingState === LoadingState.INITIALIZING ||
+            connectionError
+          }
+        />
+      </div>
+    </div>
+  )
+}
+
+export default ChatScreen
