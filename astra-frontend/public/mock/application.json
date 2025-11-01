@@ -1,0 +1,104 @@
+[
+    {
+        "jobId": "job-123",
+        "title": "Logo Design for Fashion Brand",
+        "applicationsCount": 2,
+        "image": "/designs_jacket.png",
+        "price": 400,
+        "applicants": [
+            {
+                "makerId": "maker-1",
+                "name": "John Creator",
+                "email": "john.doe@example.com",
+                "profileImage": "/profilePicture1.png",
+                "yearsOfExperience": 5,
+                "skills": [
+                    "Logo Design",
+                    "Branding",
+                    "Illustration"
+                ],
+                "proposedAmount": 450,
+                "minimumNegotiableAmount": 400,
+                "timeline": "2 weeks",
+                "portfolioLinks": [
+                    "https://portfolio.example.com/project1",
+                    "https://behance.net/mywork"
+                ],
+                "selectedProjects": [
+                    {
+                        "id": "project-id-1",
+                        "title": "Luxury Bag Branding",
+                        "thumbnail": "/Rectangle 23986.png",
+                        "link": "https://portfolio.example.com/bag-branding"
+                    },
+                    {
+                        "id": "project-id-2",
+                        "title": "Fashion Logo Concept",
+                        "thumbnail": "/Rectangle 23987.png",
+                        "link": "https://behance.net/fashion-logo"
+                    }
+                ]
+            },
+            {
+                "makerId": "maker-2",
+                "name": "Jane Smith",
+                "email": "jane.smith@example.com",
+                "profileImage": "/designs_mask.png",
+                "yearsOfExperience": 3,
+                "skills": [
+                    "UI/UX Design",
+                    "Typography"
+                ],
+                "proposedAmount": 500,
+                "minimumNegotiableAmount": 450,
+                "timeline": "3 weeks",
+                "portfolioLinks": [
+                    "https://dribbble.com/janesmith"
+                ],
+                "selectedProjects": [
+                    {
+                        "id": "project-id-3",
+                        "title": "Minimalist Portfolio UI",
+                        "thumbnail": "/Rectangle 24005.png",
+                        "link": "https://dribbble.com/janesmith/portfolio-ui"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "jobId": "job-456",
+        "title": "E-commerce Website UI",
+        "applicationsCount": 1,
+        "image": "/designs_mask.png",
+        "price": 1000,
+        "applicants": [
+            {
+                "makerId": "maker-3",
+                "name": "Michael Johnson",
+                "email": "michael.j@example.com",
+                "profileImage": "/icon.png",
+                "yearsOfExperience": 7,
+                "skills": [
+                    "Web Design",
+                    "E-commerce",
+                    "React"
+                ],
+                "proposedAmount": 1200,
+                "minimumNegotiableAmount": 1000,
+                "timeline": "1 month",
+                "portfolioLinks": [
+                    "https://mikeportfolio.dev"
+                ],
+                "selectedProjects": [
+                    {
+                        "id": "project-id-4",
+                        "title": "Sneaker E-Shop UI",
+                        "thumbnail": "/design_cap.png",
+                        "link": "https://mikeportfolio.dev/sneaker-ui"
+                    }
+                ]
+            }
+        ]
+    }
+]
