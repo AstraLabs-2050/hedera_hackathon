@@ -1,0 +1,46 @@
+{
+  "stats": [
+    {
+      "date": "2025-07-31",
+      "revenue": 1000,
+      "sales": 50,
+      "visitors": 200,
+      "outfits": 10
+    },
+    {
+      "date": "2025-08-01",
+      "revenue": 500,
+      "sales": 20,
+      "visitors": 200,
+      "outfits": 10
+    },
+    {
+      "date": "2025-06-30",
+      "revenue": 800,
+      "sales": 40,
+      "visitors": 150,
+      "outfits": 5
+    },
+    {
+      "date": "2025-07-12",
+      "revenue": 300,
+      "sales": 10,
+      "visitors": 80,
+      "outfits": 5
+    },
+    {
+      "date": "2025-07-01",
+      "revenue": 600,
+      "sales": 35,
+      "visitors": 90,
+      "outfits": 3
+    },
+    {
+      "date": "2025-06-01",
+      "revenue": 300,
+      "sales": 25,
+      "visitors": 1200,
+      "outfits": 3
+    }
+  ]
+}
