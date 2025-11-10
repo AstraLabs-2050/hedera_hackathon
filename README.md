@@ -1,6 +1,9 @@
 # Astra Virtual Retail
 # Discover African Fashion in VR Before It Exists IRL  
 
+![Solution (4)](https://github.com/user-attachments/assets/370197c4-40e1-425f-b919-80fdcb7cff73)
+
+
 🌍 Hedera Africa Hackathon 2025 Submission
 
 
